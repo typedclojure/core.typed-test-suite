@@ -15,6 +15,9 @@
                 (>!! c x))))
     c))
 
+; The second argument needs `:without [Number]` to accurately refine the type
+; of the first branch of the number? test. Otherwise, the first branch of (number? cs-or-n)
+; can only be refined to (U Int (Seqable (Chan Any))), not good enough to pass to `repeatedly`.
 (ann fan-out [(Port Any) (U t/Int (Extends [(Seqable (Chan Any))] :without [Number])) -> (Seqable (Chan Any))])
 (defn fan-out [in cs-or-n]
   (let [cs (if (number? cs-or-n)
