@@ -1,9 +1,8 @@
 (ns async.alts
-  (:require [clojure.core.typed :refer [ann def-alias check-ns cf doseq> loop>
-                                        AnyInteger dotimes> Seqable ann-form]
+  (:require [clojure.core.typed :refer [ann check-ns cf dotimes> Seqable ann-form]
              :as t]
-            [clojure.core.typed.async :refer [Chan TimeoutChan chan> Port]]
-            [clojure.core.async :as async :refer [<! >! <!! >!! timeout chan alt! alts! alts!!]]))
+            [clojure.core.typed.async :refer [Chan chan> Port]]
+            [clojure.core.async :as async :refer [<!! >!! chan alts!!]]))
 
 (t/typed-deps clojure.core.typed.async)
 
