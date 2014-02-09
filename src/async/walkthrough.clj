@@ -9,6 +9,7 @@
 
 (t/typed-deps clojure.core.typed.async)
 
+(fn []
 ;;;; CHANNELS
 
 ;; Data is transmitted on queue-like channels. By default channels
@@ -146,3 +147,4 @@
 ;; Use `sliding-buffer` to drop oldest values when the buffer is full:
 (chan> Any (sliding-buffer> Any 10))
 
+)

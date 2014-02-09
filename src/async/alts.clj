@@ -29,8 +29,9 @@
                 (alts!! outs))))
     cs))
 
-(let [cout (chan> Any)
-      cin (fan-in (fan-out cout (repeatedly 3 chan)))]
-  (dotimes> [n 10]
-    (>!! cout n)
-    (prn (<!! cin))))
+(fn []
+  (let [cout (chan> Any)
+        cin (fan-in (fan-out cout (repeatedly 3 chan)))]
+    (dotimes> [n 10]
+      (>!! cout n)
+      (prn (<!! cin)))))

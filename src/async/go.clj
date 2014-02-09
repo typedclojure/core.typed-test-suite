@@ -1,11 +1,14 @@
 (ns async.go
-  (:require [clojure.core.typed :refer [ann def-alias check-ns cf doseq> loop>
-                                        AnyInteger typed-deps]
+  (:require [clojure.core.typed 
+             :refer [ann def-alias check-ns cf doseq> loop>
+                     AnyInteger typed-deps ann-many]
              :as t]
-            [clojure.core.typed.async :refer [Chan TimeoutChan go> chan>]]
-            [clojure.core.async :as async :refer [<! >! <!! timeout alt! ]]))
+            [clojure.core.typed.async 
+             :refer [Chan TimeoutChan go> chan>]]
+            [clojure.core.async :as async 
+             :refer [<! >! <!! timeout alt! ]]))
 
-(typed-deps clojure.core.typed.async)
+(t/typed-deps clojure.core.typed.async)
 
 (def-alias Kind
   "Id for search"
@@ -16,9 +19,6 @@
   Any)
 
 (def-alias FakeSearch [(Chan Any) Query -> (Chan Any)])
-
-(defmacro ann-many [t & vs]
-  `(do ~@(map #(list `ann % t) vs)))
 
 (ann fake-search [Kind -> FakeSearch])
 (defn fake-search [kind]
@@ -57,5 +57,5 @@
             ret
             (recur (inc i) (conj ret (alt! [c t] ([v] v)))))))))
 
-(<!! (google "clojure"))
+(fn [] (<!! (google "clojure")))
 
