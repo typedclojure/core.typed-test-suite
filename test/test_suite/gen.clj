@@ -7,7 +7,8 @@
 
 (def check-constants
     (prop/for-all [v (gen/vector gen/any-printable)]
-                  (do (t/check-form* `(quote ~v))
-                      true)))
+      (-> (t/check-form* `(quote ~v))
+          :delayed-errors
+          empty?)))
 
 (tc/quick-check 20 check-constants)
